@@ -15,6 +15,9 @@ Route::get('/', [CategoryController::class, 'index'])->name('home');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/dashboard', function () {
+    return redirect()->route('home');
+})->middleware(['auth'])->name('dashboard');
 
 // Cart routes
 Route::prefix('cart')->name('cart.')->group(function () {

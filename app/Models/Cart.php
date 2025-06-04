@@ -33,15 +33,17 @@ class Cart extends Model
         return $this->items->sum('quantity');
     }
 
-    public static function getCart()
-    {
-        if (auth()->check()) {
-            return static::firstOrCreate(['user_id' => auth()->id()]);
-        }
-        
-        return static::firstOrCreate(['session_id' => session()->getId()]);
+public static function getCart()
+{
+    if (auth()->check()) {
+        return static::firstOrCreate(
+            ['user_id' => auth()->id()],
+            ['session_id' => session()->getId()]
+        );
     }
-
+    
+    return static::firstOrCreate(['session_id' => session()->getId()]);
+}
     public function addProduct(Product $product, $quantity = 1)
     {
         $item = $this->items()->where('product_id', $product->id)->first();
