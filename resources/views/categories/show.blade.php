@@ -26,6 +26,51 @@
         text-decoration: underline;
     }
     
+    .subcategories-section {
+        background-color: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .subcategories-section h3 {
+        margin-bottom: 1rem;
+        color: #333;
+    }
+    
+    .subcategories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .subcategory-card {
+        background-color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s;
+        text-align: center;
+    }
+    
+    .subcategory-card:hover {
+        background-color: #e9ecef;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .subcategory-card a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+    }
+    
+    .subcategory-card a:hover {
+        color: #007bff;
+    }
+    
     .sort-controls {
         display: flex;
         justify-content: flex-end;
@@ -106,6 +151,21 @@
             <p>{{ $category->description }}</p>
         @endif
     </div>
+    
+    @if($category->children->count() > 0)
+        <div class="subcategories-section">
+            <h3>Subcategories</h3>
+            <div class="subcategories-grid">
+                @foreach($category->children as $subcategory)
+                    <div class="subcategory-card">
+                        <a href="{{ route('categories.show', $subcategory) }}">
+                            {{ $subcategory->name }}
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
     
     <div class="sort-controls">
         <label for="sort">Sort by:</label>

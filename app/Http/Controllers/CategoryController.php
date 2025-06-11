@@ -15,7 +15,7 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        $products = $category->products()
+        $products = $category->allProductsQuery()
             ->when(request('sort'), function ($query) {
                 $sort = request('sort');
                 switch ($sort) {
@@ -32,7 +32,7 @@ class CategoryController extends Controller
                 }
             })
             ->paginate(12);
-            
+        
         return view('categories.show', compact('category', 'products'));
     }
 }

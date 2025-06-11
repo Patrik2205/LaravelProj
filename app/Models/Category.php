@@ -26,17 +26,22 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function allProducts()
+    public function allProductsQuery()
     {
-        $products = $this->products;
-        
-        foreach ($this->children as $child) {
-            $products = $products->merge($child->allProducts());
-        }
-        
-        return $products;
+        // Get all descendant category IDs including this one
+        $categoryIds = collect([$this->id]);
+        $this->getAllDescendantIds($categoryIds);
+    
+        return Product::whereIn('category_id', $categoryIds);
     }
 
+    private function getAllDescendantIds(&$ids)
+    {
+        foreach ($this->children as $child) {
+            $ids->push($child->id);
+            $child->getAllDescendantIds($ids);
+        }
+    }
     public static function tree()
     {
         return static::with('children')->whereNull('parent_id')->get();
