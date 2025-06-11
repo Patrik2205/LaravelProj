@@ -5,72 +5,67 @@
 @push('styles')
 <style>
     .admin-header {
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 2rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 1.5rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
     
     .stat-card {
-        background-color: #fff;
-        border-radius: 8px;
+        background: white;
         padding: 1.5rem;
+        border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         text-align: center;
-        transition: transform 0.3s;
-    }
-    
-    .stat-card:hover {
-        transform: translateY(-5px);
     }
     
     .stat-number {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #007bff;
+        color: #2563eb;
         margin-bottom: 0.5rem;
     }
     
     .stat-label {
-        color: #666;
+        color: #6b7280;
         font-size: 1rem;
     }
     
     .admin-actions {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
     
     .action-btn {
-        background-color: #fff;
-        border: 2px solid #007bff;
-        color: #007bff;
-        padding: 1rem;
-        text-align: center;
+        display: block;
+        background: #2563eb;
+        color: white;
+        padding: 1rem 1.5rem;
         text-decoration: none;
         border-radius: 8px;
-        transition: all 0.3s;
+        text-align: center;
+        font-weight: bold;
+        transition: background-color 0.2s;
     }
     
     .action-btn:hover {
-        background-color: #007bff;
-        color: #fff;
+        background: #1d4ed8;
+        color: white;
     }
     
     .recent-orders {
-        background-color: #fff;
+        background: white;
+        padding: 1.5rem;
         border-radius: 8px;
-        padding: 2rem;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     
@@ -81,8 +76,9 @@
     }
     
     .orders-table th {
-        text-align: left;
         padding: 0.75rem;
+        text-align: left;
+        font-weight: bold;
         border-bottom: 2px solid #e0e0e0;
         background-color: #f8f9fa;
     }
@@ -157,6 +153,7 @@
     <div class="admin-actions">
         <a href="{{ route('admin.products.create') }}" class="action-btn">+ Add New Product</a>
         <a href="{{ route('admin.categories.create') }}" class="action-btn">+ Add New Category</a>
+        <a href="{{ route('admin.categories.index') }}" class="action-btn">Manage Categories</a>
         <a href="{{ route('admin.orders.index') }}" class="action-btn">View All Orders</a>
         <a href="{{ route('admin.products.index') }}" class="action-btn">Manage Products</a>
     </div>
